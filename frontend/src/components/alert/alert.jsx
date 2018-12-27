@@ -35,13 +35,13 @@ class Alert extends Component{
     else{
       _this.state.closeAlert();
         axios.get(_this.state.url,
-          /* {
+          {
                 params:{
                   userID: _this.state.userID,
-                  movieID: _this.state.userID,
-                  rating: i
+                  movieID: _this.state.movieID,
+                  rating: rating
                 }
-            }*/)
+            })
             .then(function (response) { 
               if(!response.data.success){
                 alert("评分失败")

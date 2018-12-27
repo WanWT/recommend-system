@@ -26,4 +26,9 @@ public class RedisMovieRecommendResposity implements MovieRecommendResposity {
         }
         return res;
     }
+
+    @Override
+    public boolean removeRecommendMovie(int userID, int movieID) {
+        return RedisUtil.eraseKeyList(movieRecommendKey + "_" + String.valueOf(userID), String.valueOf(movieID));
+    }
 }

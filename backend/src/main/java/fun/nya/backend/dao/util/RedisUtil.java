@@ -41,7 +41,7 @@ public class RedisUtil {
     public static boolean leftSetKeyList(String key, String value) {
         LOGGER.info("left set,list,key,"+ key + ",value," + value);
         try{
-            return stringRedisTemplate.opsForList().leftPush(key, value) > 0;
+            return stringRedisTemplate.opsForList().rightPush(key, value) > 0;
         } catch (Exception ex) {
             LOGGER.error("left set,list,key,"+ key + ",value," + value, ex);
             return false;
@@ -51,10 +51,20 @@ public class RedisUtil {
         LOGGER.info("left get,list n,key,"+ key);
         try{
             long listSize = stringRedisTemplate.opsForList().size(key);
-            return stringRedisTemplate.opsForList().range(key, 0, n - 1);
+            LOGGER.info("left get,list n,key,listSize "+ listSize);
+            return stringRedisTemplate.opsForList().range(key, listSize - n, listSize - 1);
         } catch (Exception ex) {
             LOGGER.error("left get,list n,key,"+ key, ex);
             return null;
+        }
+    }
+    public static boolean eraseKeyList(String key, String value) {
+        LOGGER.info("erase,list,key,"+ key + ",value," + value);
+        try{
+            return stringRedisTemplate.opsForList().remove(key, 1, value) > 0;
+        } catch (Exception ex) {
+            LOGGER.error("erase,list,key,"+ key + ",value," + value, ex);
+            return false;
         }
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../mock/mockdata';
+//import '../mock/mockdata';
 import Alert from "./alert/alert.jsx";
 require("../css/table.css");
 
@@ -31,21 +31,25 @@ class MovieRec extends React.Component
 
       componentDidMount() {
         const _this = this;
-        axios.get(_this.props.source,/*{params:{userID:_this.props.params}}*/)
+        axios.get(_this.props.source,{params:{userID:_this.props.params}})
         .then(
           function(result) {
           var movie = result.data.data[0];
+          var genresString = "";
+          for(var i = 0;i < movie.genres.length;++i) {
+            genresString += movie.genres[i] + " "
+          }
           _this.setState({
             isLoaded: true,
             movieID: movie.movieID,
-            movieName: movie.movieName,
-            genres: movie.genres,
+            movieName: movie.movieTitle,
+            genres: genresString,
             releaseDate: movie.releaseDate,
             movieURL: movie.imdbURL,
             open: ()=>{
               console.log("opening...")
               Alert.open({
-                url:"localhost/login.json",
+                url:"http://localhost:8080/updateMovieRating.json",
                 userID:this.props.params,
                 movieID:this.state.movieID,
                 closeAlert:function(){
@@ -67,7 +71,7 @@ class MovieRec extends React.Component
       open=()=>{
         console.log("open...")
         Alert.open({
-          url:"localhost/login.json",
+          url:"http://localhost:8080/updateMovieRating.json",
           userID:this.props.params,
           movieID:this.state.movieID,
           closeAlert:function(){

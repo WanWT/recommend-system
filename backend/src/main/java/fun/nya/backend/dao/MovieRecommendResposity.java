@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MovieRecommendResposity {
     List<MovieInfoModel> getRecommendMovieByUserID(int userID, long n);
+    boolean removeRecommendMovie(int userID, int movieID);
 }
