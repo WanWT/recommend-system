@@ -1,0 +1,32 @@
+table.movie{
+            border-collapse: collapse;
+            margin: 10px auto;
+            text-align: center;
+            table-layout:fixed;
+            word-wrap:break-word;
+            width: 450px;
+        }
+table.movie td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+table.movie thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+table.movie tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+table.movie tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+button{
+    width: 35px;
+    height: 20px;
+    margin-left: 2px;
+}
