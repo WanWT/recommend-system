@@ -38,8 +38,8 @@ class Alert extends Component{
           /* {
                 params:{
                   userID: _this.state.userID,
-                  movieID: _this.state.userID,
-                  rating: i
+                  movieID: _this.state.movieID,
+                  rating: rating
                 }
             }*/)
             .then(function (response) { 

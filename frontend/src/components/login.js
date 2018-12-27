@@ -34,7 +34,7 @@ class Login extends Component {
             });
             axios.get('localhost/login.json',
             /* {
-                    params:{userId:document.getElementById("userID").value}
+                    params:{userID:document.getElementById("userID").value}
                 }*/)
                 .then(function (response) {
                     if(!response.data.success){

@@ -35,11 +35,15 @@ class MovieRec extends React.Component
         .then(
           function(result) {
           var movie = result.data.data[0];
+          var genresString = "";
+          for(var i = 0;i < movie.genres.length;++i) {
+            genresString += movie.genres[i] + " "
+          }
           _this.setState({
             isLoaded: true,
             movieID: movie.movieID,
-            movieName: movie.movieName,
-            genres: movie.genres,
+            movieName: movie.movieTitle,
+            genres: genresString,
             releaseDate: movie.releaseDate,
             movieURL: movie.imdbURL,
             open: ()=>{
