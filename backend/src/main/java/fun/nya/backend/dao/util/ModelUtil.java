@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.time.Instant;
 
 
 @Component
@@ -40,7 +41,8 @@ public class ModelUtil {
         userRatingModel.setUserID(Integer.parseInt(ls[0]));
         userRatingModel.setMovieID(Integer.parseInt(ls[1]));
         userRatingModel.setRating(Double.parseDouble(ls[2]));
-        userRatingModel.setTimeStamp(Date.valueOf(ls[3]+"000"));
+        //System.out.println("userating " + ls[3]);
+        userRatingModel.setTimeStamp(new Date(Long.valueOf(ls[3])));
         return userRatingModel;
     }
 }

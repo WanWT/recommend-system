@@ -4,7 +4,7 @@ import * as serviceWorker from '../serviceWorker';
 import Photo from './photo';
 import Button from './button';
 import MovieRec from './movie';
-import '../mock/mockdata';
+//import '../mock/mockdata';
 require("../css/login.css");
 require("../css/photo.css");
 require("../css/recomend.css");
@@ -32,10 +32,10 @@ class Login extends Component {
                 isLogin: true,
                 userId: document.getElementById("userID").value,
             });
-            axios.get('localhost/login.json',
-            /* {
-                    params:{userId:document.getElementById("userID").value}
-                }*/)
+            axios.get('http://localhost:8080/login.json',
+             {
+                    params:{userID:document.getElementById("userID").value}
+                })
                 .then(function (response) {
                     if(!response.data.success){
                             alert("出错啦,没有这个用户");
@@ -97,7 +97,7 @@ class Login extends Component {
                     <div id="button"><Button></Button></div>       
                 </div>,
                 <div class="left" id="example">
-                    <MovieRec source = "localhost/login.json" params={this.state.userId}/>
+                    <MovieRec source = "http://localhost:8080/getRecommendMovie.json" params={this.state.userId}/>
                 </div>,
                 <div class="right">
                     最近热门影片
