@@ -5,6 +5,6 @@ import fun.nya.backend.dao.model.UserInfoModel;
 /**
  * User Information Dao Resposity interface
  */
-public interface UserInfoResposity {
+public interface UserInfoRepository {
     UserInfoModel getUserInfoByUserID(int userID);
 }

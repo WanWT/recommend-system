@@ -1,6 +1,6 @@
 package fun.nya.backend.dao.impl;
 
-import fun.nya.backend.dao.UserRatingResposity;
+import fun.nya.backend.dao.UserRatingRepository;
 import fun.nya.backend.dao.model.UserRatingModel;
 import fun.nya.backend.dao.util.ModelUtil;
 import fun.nya.backend.dao.util.RedisUtil;
@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Component
-public class RedisUserRatingResposity implements UserRatingResposity {
+public class RedisUserRatingRepository implements UserRatingRepository {
     @Value("${redis.key.user.rating}")
     private String userRatingKey;
     @Value("${redis.key.rating.query}")

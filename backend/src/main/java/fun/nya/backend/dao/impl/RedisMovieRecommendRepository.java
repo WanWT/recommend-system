@@ -1,7 +1,7 @@
 package fun.nya.backend.dao.impl;
 
-import fun.nya.backend.dao.MovieInfoResposity;
-import fun.nya.backend.dao.MovieRecommendResposity;
+import fun.nya.backend.dao.MovieInfoRepository;
+import fun.nya.backend.dao.MovieRecommendRepository;
 import fun.nya.backend.dao.model.MovieInfoModel;
 import fun.nya.backend.dao.util.ModelUtil;
 import fun.nya.backend.dao.util.RedisUtil;
@@ -15,13 +15,13 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 @Component
-public class RedisMovieRecommendResposity implements MovieRecommendResposity {
+public class RedisMovieRecommendRepository implements MovieRecommendRepository {
     @Value("${redis.key.movie.recommend}")
     private String movieRecommendKey;
     @Value("${redis.key.recommend.query}")
     private String recommendQueryKey;
     @Autowired
-    private MovieInfoResposity movieInfoResposity;
+    private MovieInfoRepository movieInfoRepository;
     @Override
     public List<MovieInfoModel> getRecommendMovieByUserID(int userID, long n) {
         List<String> recommendMovies = RedisUtil.leftGetKeyList(movieRecommendKey + "_" + String.valueOf(userID), n);
@@ -43,7 +43,7 @@ public class RedisMovieRecommendResposity implements MovieRecommendResposity {
         }
         List<MovieInfoModel> res = new ArrayList<>(recommendMovies.size());
         for(String movieID : recommendMovies) {
-            res.add(movieInfoResposity.getMovieInfoModelByMovieID(Integer.parseInt(movieID)));
+            res.add(movieInfoRepository.getMovieInfoModelByMovieID(Integer.parseInt(movieID)));
         }
         return res;
     }
