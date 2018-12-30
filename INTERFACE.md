@@ -1,4 +1,5 @@
 ### 接口约定
+
 路径前网址尽量可配置，如localhost可替换为127.0.0.1
 大小写敏感
 
@@ -62,31 +63,35 @@ success 表示请求是否成功
 
 ### redis数据库约定
 
+> rating -> userID,movieID,rating,timestamp
+
 #### spark
 
 ##### 用户评分数据源
 
-> user_rating_ \[userID\]  list\[string\]
->
-> string -> userID,movieID,rating,timestamp
+> user_rating_ \[userID\]  list\[rating\]
 
-##### 电影相似度推荐数据源
+##### 电影推荐数据源
 
-> movie_info_ \[movieID] string
+> recommend_movie_\[userID\] list[movieID]
+
+#### spark stream
+
+##### 电影推荐流
+
+> recommend_for list\[string\]
 >
-> string-> movieID,movieTitle,geners[]
+> string -> userID,num 
+
+##### 评分流
+
+> new_rating list\[rating\]
 
 #### 网站后台
 
 ##### 推荐电影数据源
 
 >  recommed\_movie_\[userID\].list\[movieID\]
-
-##### 用户信息数据源
-
-> user_info_\[userID] string
->
-> string -> userID,age,gender,occupation,zipCode
 
 ##### 电影信息数据源
 

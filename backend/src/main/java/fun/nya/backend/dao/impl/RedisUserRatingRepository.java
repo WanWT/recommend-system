@@ -1,6 +1,6 @@
 package fun.nya.backend.dao.impl;
 
-import fun.nya.backend.dao.UserRatingResposity;
+import fun.nya.backend.dao.UserRatingRepository;
 import fun.nya.backend.dao.model.UserRatingModel;
 import fun.nya.backend.dao.util.ModelUtil;
 import fun.nya.backend.dao.util.RedisUtil;
@@ -12,17 +12,19 @@ import java.util.List;
 
 
 @Component
-public class RedisUserRatingResposity implements UserRatingResposity {
+public class RedisUserRatingRepository implements UserRatingRepository {
     @Value("${redis.key.user.rating}")
     private String userRatingKey;
+    @Value("${redis.key.rating.query}")
+    private String newRatingKey;
     @Override
     public boolean updateUserRating(UserRatingModel userRatingModel) {
-        return RedisUtil.leftSetKeyList(userRatingKey + "_" + userRatingModel.getUserID(), userRatingModel.toString());
+        return RedisUtil.leftSetKeyList(newRatingKey, userRatingModel.toString());
     }
 
     @Override
     public boolean updateUserRating(int userID, int movieID, double rating) {
-        return RedisUtil.leftSetKeyList(userRatingKey + "_" + userID,
+        return RedisUtil.leftSetKeyList(newRatingKey,
                 userID+ModelUtil.SEPATATOR+movieID+ModelUtil.SEPATATOR+rating+ModelUtil.SEPATATOR+(System.currentTimeMillis() / 1000));
     }
 

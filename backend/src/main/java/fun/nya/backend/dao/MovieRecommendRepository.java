@@ -4,7 +4,7 @@ import fun.nya.backend.dao.model.MovieInfoModel;
 
 import java.util.List;
 
-public interface MovieRecommendResposity {
+public interface MovieRecommendRepository {
     List<MovieInfoModel> getRecommendMovieByUserID(int userID, long n);
     boolean removeRecommendMovie(int userID, int movieID);
 }

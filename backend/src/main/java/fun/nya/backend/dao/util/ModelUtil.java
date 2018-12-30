@@ -28,9 +28,18 @@ public class ModelUtil {
     public static MovieInfoModel convertStringAndUrlToMovieInfoModel(String s, String url) {
         MovieInfoModel movieInfoModel = new MovieInfoModel();
         String[] ls = s.split(SEPATATOR);
+        if(ls.length == 4) {
+            ls[1] = ls[1] + ls[2];
+            ls[2] = ls[3];
+        }
         movieInfoModel.setMovieID(Integer.parseInt(ls[0]));
         movieInfoModel.setMovieTitle(ls[1]);
-        movieInfoModel.setReleaseDate(ls[1].substring(ls[1].indexOf("(") + 1,ls[1].indexOf(")")));
+        String releaseData = null;
+        int startIndex = ls[1].lastIndexOf("(");
+        int endIndex = ls[1].lastIndexOf(")");
+        if(startIndex >= 0 && endIndex < ls[1].length())
+            releaseData = ls[1].substring(startIndex + 1,endIndex);
+        movieInfoModel.setReleaseDate(releaseData);
         movieInfoModel.setIMDbURL("http://www.imdb.com/title/tt" + url.split(SEPATATOR)[1]);
         movieInfoModel.setGenres(ls[2].split(MOVIE_GENERS_SEPARATOR));
         return movieInfoModel;

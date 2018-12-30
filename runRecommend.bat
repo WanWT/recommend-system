@@ -1,0 +1,1 @@
+spark-submit --class fun.nya.recommend.recommend.Main --packages com.redislabs:spark-redis:2.3.1-M2 .\target\scala-2.11\recommend-system_2.11-0.1.jar recommend

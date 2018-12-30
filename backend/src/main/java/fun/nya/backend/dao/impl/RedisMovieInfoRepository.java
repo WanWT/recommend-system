@@ -1,6 +1,6 @@
 package fun.nya.backend.dao.impl;
 
-import fun.nya.backend.dao.MovieInfoResposity;
+import fun.nya.backend.dao.MovieInfoRepository;
 import fun.nya.backend.dao.model.MovieInfoModel;
 import fun.nya.backend.dao.util.ModelUtil;
 import fun.nya.backend.dao.util.RedisUtil;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RedisMovieInfoResposity implements MovieInfoResposity {
+public class RedisMovieInfoRepository implements MovieInfoRepository {
     @Value("${redis.key.movie.info}")
     private String movieInfoKey;
     @Value("${redis.key.movie.info.url}")
