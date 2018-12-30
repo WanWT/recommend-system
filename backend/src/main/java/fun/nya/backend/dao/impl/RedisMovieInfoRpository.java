@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RedisMovieInfoResposity implements MovieInfoResposity {
+public class RedisMovieInfoRpository implements MovieInfoResposity {
     @Value("${redis.key.movie.info}")
     private String movieInfoKey;
     @Value("${redis.key.movie.info.url}")

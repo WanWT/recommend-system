@@ -15,14 +15,16 @@ import java.util.List;
 public class RedisUserRatingResposity implements UserRatingResposity {
     @Value("${redis.key.user.rating}")
     private String userRatingKey;
+    @Value("${redis.key.rating.query}")
+    private String newRatingKey;
     @Override
     public boolean updateUserRating(UserRatingModel userRatingModel) {
-        return RedisUtil.leftSetKeyList(userRatingKey + "_" + userRatingModel.getUserID(), userRatingModel.toString());
+        return RedisUtil.leftSetKeyList(newRatingKey, userRatingModel.toString());
     }
 
     @Override
     public boolean updateUserRating(int userID, int movieID, double rating) {
-        return RedisUtil.leftSetKeyList(userRatingKey + "_" + userID,
+        return RedisUtil.leftSetKeyList(newRatingKey,
                 userID+ModelUtil.SEPATATOR+movieID+ModelUtil.SEPATATOR+rating+ModelUtil.SEPATATOR+(System.currentTimeMillis() / 1000));
     }
 

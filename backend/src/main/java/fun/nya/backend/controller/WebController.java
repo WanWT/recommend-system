@@ -21,7 +21,7 @@ public class WebController {
     }
     @RequestMapping(value = "/getRecommendMovie.json", method = RequestMethod.GET)
     public Result getRecommendMovie(@RequestParam(value = "userID") int userID) {
-        return movieManager.getRecommendMovieByUserID(userID, 1);
+        return movieManager.getRecommendMovieByUserID(userID, 10);
     }
     @RequestMapping(value = "/updateMovieRating.json", method = RequestMethod.GET)
     public Result updateMovieRating(
